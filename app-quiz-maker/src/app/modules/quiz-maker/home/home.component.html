@@ -1,0 +1,33 @@
+<div class="container">
+    <h1>QUIZ MAKER</h1>
+    <form>
+      <div class="form-group">
+        <select [(ngModel)] = "categorySelect" name="category" id="categorySelect">
+            <option value="" value="">Select a category</option>
+            <ng-container *ngFor = "let category of allCategories">
+                <option value={{category.id}}>{{category.name}}</option>
+            </ng-container>
+        </select>
+
+        <select [(ngModel)] = "difficultySelect"  name="difficulty" id="difficultySelect">
+            <option value="" value="">Select a difficulty</option>
+            <ng-container *ngFor = "let difficulty of difficultyLevels">
+                <option value={{difficulty}}>{{difficulty}}</option>
+            </ng-container>
+        </select>
+
+        <button
+         class=""
+         #createBtn id="createBtn"
+         [disabled]="categorySelect.length<=0 || difficultySelect.length<=0"
+         (click) = "getListQuiz()"
+         >
+            Create 
+          </button>
+          <ng-container *ngIf="showListQuiz">
+            <app-list-quiz [category]="categorySelect" [difficulty] = "difficultySelect"></app-list-quiz>
+          </ng-container>
+          
+      </div>
+    </form>
+ </div>

@@ -1,0 +1,20 @@
+<ng-container *ngIf="quizData">
+    <div class="container">
+        <form>
+            <div *ngFor="let question of quizData.results; let i = index" class="question">
+                <p [innerHTML]="question.question"></p>
+                <div *ngFor="let answer of question.answers; let answerIndex = index" class="answer-button-container">
+                <button
+                    class="answer-button"
+                    (click)="selectAnswer(answer, i)"
+                    [ngClass]="{ 'selected': selectedAnswers[i] === answer }"
+                >
+                <span [innerHTML]="answer"></span>
+                </button>
+                </div> 
+            </div>
+            <button class="submit-button" (click)="submitQuiz()" *ngIf="areAllQuestionsAnswered()">Submit</button>
+        </form>
+  </div>
+</ng-container>
+  
